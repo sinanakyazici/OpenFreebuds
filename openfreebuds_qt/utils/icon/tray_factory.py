@@ -86,10 +86,10 @@ def create_battery_percentage_icon(theme: str, percentage: int) -> Image.Image:
 
     # Try to use a built-in font, fallback to default
     try:
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 24)
+        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 40)
     except Exception:
         try:
-            font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 24)
+            font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 40)
         except Exception:
             font = ImageFont.load_default()
 
