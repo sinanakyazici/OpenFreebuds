@@ -82,17 +82,20 @@ def create_battery_percentage_icon(theme: str, percentage: int) -> Image.Image:
     # Get text - only the number without % sign
     text = f"{percentage}"
 
-    # Try to use a built-in font
+    # Try to use Tahoma Regular font
     try:
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 48)
+        font = ImageFont.truetype("/usr/share/fonts/truetype/msttcorefonts/tahoma.ttf", 48)
     except Exception:
         try:
-            font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 48)
+            font = ImageFont.truetype("tahoma.ttf", 48)
         except Exception:
             try:
-                font = ImageFont.truetype("arial.ttf", 48)
+                font = ImageFont.truetype("C:/Windows/Fonts/tahoma.ttf", 48)
             except Exception:
-                font = ImageFont.load_default()
+                try:
+                    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 48)
+                except Exception:
+                    font = ImageFont.load_default()
 
     # Get text bounding box
     bbox = draw.textbbox((0, 0), text, font=font)
