@@ -1052,6 +1052,11 @@
         <translation>Подключить</translation>
     </message>
     <message>
+        <location filename="../../tray/menu.py" line="63"/>
+        <source>Refresh battery</source>
+        <translation>Обновить батарею</translation>
+    </message>
+    <message>
         <location filename="../../tray/menu.py" line="77"/>
         <source>Settings…</source>
         <translation>Настройки…</translation>

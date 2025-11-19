@@ -1051,6 +1051,11 @@
       <translation>Bağlan</translation>
     </message>
     <message>
+      <location filename="../../tray/menu.py" line="63" />
+      <source>Refresh battery</source>
+      <translation>Bataryayı yenile</translation>
+    </message>
+    <message>
       <location filename="../../tray/menu.py" line="77" />
       <source>Settings…</source>
       <translation>Ayarlar…</translation>

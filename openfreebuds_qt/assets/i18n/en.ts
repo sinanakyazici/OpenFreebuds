@@ -1051,6 +1051,11 @@
       <translation type="unfinished" />
     </message>
     <message>
+      <location filename="../../tray/menu.py" line="63" />
+      <source>Refresh battery</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
       <location filename="../../tray/menu.py" line="77" />
       <source>Settings…</source>
       <translation type="unfinished" />
