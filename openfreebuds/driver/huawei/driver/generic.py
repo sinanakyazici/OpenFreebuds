@@ -53,6 +53,14 @@ class OfbDriverHuaweiGeneric(OfbDriverSppGeneric):
                 log.exception(f"Init of {handler.handler_id} failed")
 
     async def stop(self):
+        # Cleanup all handlers
+        for handler in self.handlers:
+            if hasattr(handler, 'cleanup'):
+                try:
+                    await handler.cleanup()
+                except Exception:
+                    log.exception(f"Cleanup of {handler.handler_id} failed")
+
         await super().stop()
         self.__on_package_handlers = {}
 
