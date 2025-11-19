@@ -1,12 +1,13 @@
 from typing import Optional
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 from openfreebuds import IOpenFreebuds
 from openfreebuds_qt.constants import ASSETS_PATH
 from openfreebuds_qt.utils.draw import image_combine_mask, image_spawn_bg_mask
 
 ICON_SIZE = (64, 64)
+BATTERY_ICON_SIZE = (256, 256)  # Larger size for battery percentage icons
 TRAY_ICON_PATH = ASSETS_PATH / "icon/tray"
 
 # Images
@@ -70,6 +71,35 @@ def create_tray_icon(theme: str, state: int, battery: int, anc_mode: Optional[st
                                 background=PRESET_TRANSPARENT)
 
     return result
+
+
+def create_battery_percentage_icon(theme: str, percentage: int, color: tuple = (0, 255, 0, 255)) -> Image.Image:
+    """Create a simple icon showing battery percentage as text"""
+    # Create a transparent background
+    img = Image.new("RGBA", ICON_SIZE, color=(0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+
+    # Get text - only the number without % sign
+    text = f"{percentage}"
+
+    # Try to use Tahoma Regular font
+    try:
+        font = ImageFont.truetype("C:/Windows/Fonts/tahoma.ttf", 40)
+    except Exception:
+        font = ImageFont.load_default()
+
+    # Get text bounding box
+    bbox = draw.textbbox((0, 0), text, font=font)
+    text_width = bbox[2] - bbox[0]
+
+    # Center the text
+    x = (ICON_SIZE[0] - text_width) / 2
+    y = 0
+
+    # Draw text with specified color
+    draw.text((x, y), text, fill=color, font=font)
+
+    return img
 
 
 def _get_hash(state, battery=0, noise_mode=0):

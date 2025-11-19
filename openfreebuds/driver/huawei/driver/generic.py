@@ -53,6 +53,14 @@ class OfbDriverHuaweiGeneric(OfbDriverSppGeneric):
                 log.exception(f"Init of {handler.handler_id} failed")
 
     async def stop(self):
+        # Cleanup all handlers
+        for handler in self.handlers:
+            if hasattr(handler, 'cleanup'):
+                try:
+                    await handler.cleanup()
+                except Exception:
+                    log.exception(f"Cleanup of {handler.handler_id} failed")
+
         await super().stop()
         self.__on_package_handlers = {}
 
@@ -130,6 +138,14 @@ class OfbDriverHuaweiGeneric(OfbDriverSppGeneric):
             self.__on_package_handlers[pkg_id] = handler
         for pkg_id in handler.ignore_commands:
             self.__on_package_handlers[pkg_id] = _empty_handler
+
+    async def request_property_update(self, handler_id: str):
+        """Request a property update from a specific handler"""
+        for handler in self.handlers:
+            if handler.handler_id == handler_id and hasattr(handler, 'request_update'):
+                await handler.request_update()
+                return True
+        return False
 
 
 class OfbDriverHandlerHuawei(OfbDriverHandlerGeneric):

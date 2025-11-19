@@ -1051,6 +1051,11 @@
       <translation type="unfinished" />
     </message>
     <message>
+      <location filename="../../tray/menu.py" line="63" />
+      <source>Refresh</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
       <location filename="../../tray/menu.py" line="77" />
       <source>Settings…</source>
       <translation type="unfinished" />
@@ -1161,6 +1166,21 @@
     <message>
       <location filename="../../designer/ui_settings.ui" line="0" />
       <source>Show equalizer preset switcher in menu (if available)</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../../designer/ui_settings.ui" line="0" />
+      <source>Show left earbud battery percentage on tray</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../../designer/ui_settings.ui" line="0" />
+      <source>Show right earbud battery percentage on tray</source>
+      <translation type="unfinished" />
+    </message>
+    <message>
+      <location filename="../../designer/ui_settings.ui" line="0" />
+      <source>Show case battery percentage on tray</source>
       <translation type="unfinished" />
     </message>
   </context>

@@ -1053,6 +1053,11 @@
         <translation>Verbinden</translation>
     </message>
     <message>
+        <location filename="../../tray/menu.py" line="63"/>
+        <source>Refresh</source>
+        <translation>Aktualisieren</translation>
+    </message>
+    <message>
         <location filename="../../tray/menu.py" line="77"/>
         <source>Settings…</source>
         <translation>Einstellungen…</translation>
@@ -1165,6 +1170,21 @@
         <location filename="../../designer/ui_settings.ui" line="0"/>
         <source>Show equalizer preset switcher in menu (if available)</source>
         <translation>Zeige Equalizerprofil im Menü (falls verfügbar)</translation>
+    </message>
+    <message>
+        <location filename="../../designer/ui_settings.ui" line="0"/>
+        <source>Show left earbud battery percentage on tray</source>
+        <translation>Akkuprozentsatz des linken Ohrhörers in der Taskleiste anzeigen</translation>
+    </message>
+    <message>
+        <location filename="../../designer/ui_settings.ui" line="0"/>
+        <source>Show right earbud battery percentage on tray</source>
+        <translation>Akkuprozentsatz des rechten Ohrhörers in der Taskleiste anzeigen</translation>
+    </message>
+    <message>
+        <location filename="../../designer/ui_settings.ui" line="0"/>
+        <source>Show case battery percentage on tray</source>
+        <translation>Akkuprozentsatz des Gehäuses in der Taskleiste anzeigen</translation>
     </message>
 </context>
 <context>

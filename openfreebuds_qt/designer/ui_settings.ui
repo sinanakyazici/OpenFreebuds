@@ -149,6 +149,57 @@
         </property>
        </widget>
       </item>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="tray_show_left_battery">
+        <property name="text">
+         <string>Show left earbud battery percentage on tray</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="tray_left_battery_color_button">
+        <property name="text">
+         <string>Color</string>
+        </property>
+        <property name="maximumWidth">
+         <number>80</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QCheckBox" name="tray_show_right_battery">
+        <property name="text">
+         <string>Show right earbud battery percentage on tray</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QPushButton" name="tray_right_battery_color_button">
+        <property name="text">
+         <string>Color</string>
+        </property>
+        <property name="maximumWidth">
+         <number>80</number>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QCheckBox" name="tray_show_case_battery">
+        <property name="text">
+         <string>Show case battery percentage on tray</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QPushButton" name="tray_case_battery_color_button">
+        <property name="text">
+         <string>Color</string>
+        </property>
+        <property name="maximumWidth">
+         <number>80</number>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -297,6 +348,54 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tray_show_left_battery</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>OfbQtUiSettingsModule</receiver>
+   <slot>on_tray_show_left_battery(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>261</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tray_show_right_battery</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>OfbQtUiSettingsModule</receiver>
+   <slot>on_tray_show_right_battery(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>315</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>261</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tray_show_case_battery</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>OfbQtUiSettingsModule</receiver>
+   <slot>on_tray_show_case_battery(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>340</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>261</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_tray_eq_toggle(bool)</slot>
@@ -307,5 +406,8 @@
   <slot>on_autostart_toggle(bool)</slot>
   <slot>on_updater_policy_choose(int)</slot>
   <slot>on_background_toggle()</slot>
+  <slot>on_tray_show_left_battery(bool)</slot>
+  <slot>on_tray_show_right_battery(bool)</slot>
+  <slot>on_tray_show_case_battery(bool)</slot>
  </slots>
 </ui>

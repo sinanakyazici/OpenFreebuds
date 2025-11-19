@@ -1,3 +1,9 @@
+openfreebuds (0.18.0-1) bookworm trixie noble oracular plucky; urgency=medium
+
+  - Changelog not provided
+
+ -- MelianMiko <support@mmk.pw>  Wed, 19 Nov 2025 11:02:44 +0000
+
 openfreebuds (0.17.1-1) bookworm trixie noble oracular plucky; urgency=medium
 
   Minor fixes, added Turkish translation
