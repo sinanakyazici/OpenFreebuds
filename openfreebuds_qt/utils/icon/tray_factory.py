@@ -7,6 +7,7 @@ from openfreebuds_qt.constants import ASSETS_PATH
 from openfreebuds_qt.utils.draw import image_combine_mask, image_spawn_bg_mask
 
 ICON_SIZE = (64, 64)
+BATTERY_ICON_SIZE = (256, 256)  # Larger size for battery percentage icons
 TRAY_ICON_PATH = ASSETS_PATH / "icon/tray"
 
 # Images
@@ -74,22 +75,22 @@ def create_tray_icon(theme: str, state: int, battery: int, anc_mode: Optional[st
 
 def create_battery_percentage_icon(theme: str, percentage: int) -> Image.Image:
     """Create a simple icon showing battery percentage as text"""
-    # Create a transparent background
-    img = Image.new("RGBA", ICON_SIZE, color=(0, 0, 0, 0))
+    # Create a transparent background with larger size
+    img = Image.new("RGBA", BATTERY_ICON_SIZE, color=(0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
     # Blue text color
     text_color = (0, 120, 255, 255)  # Blue color (RGB: 0, 120, 255)
 
-    # Get text
-    text = f"{percentage}%"
+    # Get text - only the number without % sign
+    text = f"{percentage}"
 
-    # Try to use a built-in font, fallback to default
+    # Try to use a built-in font with larger size
     try:
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 40)
+        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 180)
     except Exception:
         try:
-            font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 40)
+            font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 180)
         except Exception:
             font = ImageFont.load_default()
 
@@ -99,8 +100,8 @@ def create_battery_percentage_icon(theme: str, percentage: int) -> Image.Image:
     text_height = bbox[3] - bbox[1]
 
     # Center the text
-    x = (ICON_SIZE[0] - text_width) / 2
-    y = (ICON_SIZE[1] - text_height) / 2
+    x = (BATTERY_ICON_SIZE[0] - text_width) / 2
+    y = (BATTERY_ICON_SIZE[1] - text_height) / 2
 
     # Draw the text
     draw.text((x, y), text, fill=text_color, font=font)
