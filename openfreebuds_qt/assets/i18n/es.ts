@@ -1168,6 +1168,21 @@
       <source>Show equalizer preset switcher in menu (if available)</source>
       <translation>Mostrar los perfiles del equalizador en el menu (si está disponible)</translation>
     </message>
+    <message>
+      <location filename="../../designer/ui_settings.ui" line="0" />
+      <source>Show left earbud battery percentage on tray</source>
+      <translation>Mostrar porcentaje de batería del auricular izquierdo en la bandeja</translation>
+    </message>
+    <message>
+      <location filename="../../designer/ui_settings.ui" line="0" />
+      <source>Show right earbud battery percentage on tray</source>
+      <translation>Mostrar porcentaje de batería del auricular derecho en la bandeja</translation>
+    </message>
+    <message>
+      <location filename="../../designer/ui_settings.ui" line="0" />
+      <source>Show case battery percentage on tray</source>
+      <translation>Mostrar porcentaje de batería del estuche en la bandeja</translation>
+    </message>
   </context>
   <context>
     <name>OfbTrayIcon</name>

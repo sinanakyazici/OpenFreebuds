@@ -1169,6 +1169,21 @@
         <source>Show equalizer preset switcher in menu (if available)</source>
         <translation>Показывать опции эквалайзера в меню (если доступно)</translation>
     </message>
+    <message>
+        <location filename="../../designer/ui_settings.ui" line="0"/>
+        <source>Show left earbud battery percentage on tray</source>
+        <translation>Показывать процент заряда левого наушника в трее</translation>
+    </message>
+    <message>
+        <location filename="../../designer/ui_settings.ui" line="0"/>
+        <source>Show right earbud battery percentage on tray</source>
+        <translation>Показывать процент заряда правого наушника в трее</translation>
+    </message>
+    <message>
+        <location filename="../../designer/ui_settings.ui" line="0"/>
+        <source>Show case battery percentage on tray</source>
+        <translation>Показывать процент заряда кейса в трее</translation>
+    </message>
 </context>
 <context>
     <name>OfbTrayIcon</name>

@@ -66,6 +66,15 @@ class OfbQtUiSettingsModule(Ui_OfbQtUiSettingsModule, OfbQtCommonModule):
         with blocked_signals(self.tray_dc_toggle):
             self.tray_dc_toggle.setChecked(self.config.get("ui", "tray_show_dual_connect", False))
 
+        with blocked_signals(self.tray_show_left_battery):
+            self.tray_show_left_battery.setChecked(self.config.get("ui", "tray_show_left_battery", False))
+
+        with blocked_signals(self.tray_show_right_battery):
+            self.tray_show_right_battery.setChecked(self.config.get("ui", "tray_show_right_battery", False))
+
+        with blocked_signals(self.tray_show_case_battery):
+            self.tray_show_case_battery.setChecked(self.config.get("ui", "tray_show_case_battery", False))
+
     async def update_ui(self, event: OfbCoreEvent):
         if not event.kind_match(OfbEventKind.QT_SETTINGS_CHANGED):
             return
@@ -125,3 +134,21 @@ class OfbQtUiSettingsModule(Ui_OfbQtUiSettingsModule, OfbQtCommonModule):
     async def on_tray_shortcut_choose(self, index: int):
         self.config.set("ui", "tray_shortcut", self.available_shortcuts[index])
         self.config.save()
+
+    @asyncSlot(bool)
+    async def on_tray_show_left_battery(self, value: bool):
+        self.config.set("ui", "tray_show_left_battery", value)
+        self.config.save()
+        await self.ofb.send_message(OfbEventKind.QT_SETTINGS_CHANGED)
+
+    @asyncSlot(bool)
+    async def on_tray_show_right_battery(self, value: bool):
+        self.config.set("ui", "tray_show_right_battery", value)
+        self.config.save()
+        await self.ofb.send_message(OfbEventKind.QT_SETTINGS_CHANGED)
+
+    @asyncSlot(bool)
+    async def on_tray_show_case_battery(self, value: bool):
+        self.config.set("ui", "tray_show_case_battery", value)
+        self.config.save()
+        await self.ofb.send_message(OfbEventKind.QT_SETTINGS_CHANGED)

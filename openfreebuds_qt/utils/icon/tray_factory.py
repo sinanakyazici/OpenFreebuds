@@ -1,6 +1,6 @@
 from typing import Optional
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 from openfreebuds import IOpenFreebuds
 from openfreebuds_qt.constants import ASSETS_PATH
@@ -70,6 +70,44 @@ def create_tray_icon(theme: str, state: int, battery: int, anc_mode: Optional[st
                                 background=PRESET_TRANSPARENT)
 
     return result
+
+
+def create_battery_percentage_icon(theme: str, percentage: int) -> Image.Image:
+    """Create a simple icon showing battery percentage as text"""
+    is_dark = theme == "dark"
+
+    # Create a transparent background
+    img = Image.new("RGBA", ICON_SIZE, color=(0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+
+    # Text color based on theme
+    text_color = (0, 0, 0, 255) if is_dark else (255, 255, 255, 255)
+
+    # Get text
+    text = f"{percentage}%"
+
+    # Try to use a built-in font, fallback to default
+    try:
+        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 24)
+    except Exception:
+        try:
+            font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 24)
+        except Exception:
+            font = ImageFont.load_default()
+
+    # Get text bounding box
+    bbox = draw.textbbox((0, 0), text, font=font)
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
+
+    # Center the text
+    x = (ICON_SIZE[0] - text_width) / 2
+    y = (ICON_SIZE[1] - text_height) / 2
+
+    # Draw the text
+    draw.text((x, y), text, fill=text_color, font=font)
+
+    return img
 
 
 def _get_hash(state, battery=0, noise_mode=0):
