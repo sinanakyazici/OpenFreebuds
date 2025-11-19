@@ -84,30 +84,22 @@ def create_battery_percentage_icon(theme: str, percentage: int) -> Image.Image:
 
     # Try to use Tahoma Regular font
     try:
-        font = ImageFont.truetype("/usr/share/fonts/truetype/msttcorefonts/tahoma.ttf", 48)
+        font = ImageFont.truetype("C:/Windows/Fonts/tahoma.ttf", 40)
     except Exception:
-        try:
-            font = ImageFont.truetype("tahoma.ttf", 48)
-        except Exception:
-            try:
-                font = ImageFont.truetype("C:/Windows/Fonts/tahoma.ttf", 48)
-            except Exception:
-                try:
-                    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 48)
-                except Exception:
-                    font = ImageFont.load_default()
+        font = ImageFont.load_default()
 
     # Get text bounding box
     bbox = draw.textbbox((0, 0), text, font=font)
     text_width = bbox[2] - bbox[0]
-    text_height = bbox[3] - bbox[1]
 
     # Center the text
     x = (ICON_SIZE[0] - text_width) / 2
-    y = (ICON_SIZE[1] - text_height) / 2
+    y = 0
 
     # Draw white text
-    draw.text((x, y), text, fill=(255, 255, 255, 255), font=font)
+    draw.text((x, y), text, fill=(0, 255, 0, 255), font=font)
+
+    return img
 
     return img
 
