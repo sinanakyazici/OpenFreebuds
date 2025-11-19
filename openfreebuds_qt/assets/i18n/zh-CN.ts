@@ -1052,8 +1052,8 @@
     </message>
     <message>
       <location filename="../../tray/menu.py" line="63" />
-      <source>Refresh battery</source>
-      <translation>刷新电量</translation>
+      <source>Refresh</source>
+      <translation>刷新</translation>
     </message>
     <message>
       <location filename="../../tray/menu.py" line="77" />

@@ -1053,8 +1053,8 @@
     </message>
     <message>
       <location filename="../../tray/menu.py" line="63" />
-      <source>Refresh battery</source>
-      <translation>Atualizar bateria</translation>
+      <source>Refresh</source>
+      <translation>Atualizar</translation>
     </message>
     <message>
       <location filename="../../tray/menu.py" line="77" />

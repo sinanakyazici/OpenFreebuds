@@ -60,7 +60,7 @@ class OfbQtTrayMenu(OfbQtTrayMenuCommon):
             "case": self.add_item("", visible=False, enabled=False),
             "global": self.add_item("", visible=False, enabled=False),
         }
-        self.refresh_battery_action = self.add_item(text=self.tr("Refresh battery"),
+        self.refresh_battery_action = self.add_item(text=self.tr("Refresh"),
                                                      callback=self.do_refresh_battery,
                                                      visible=False)
         self.add_separator()
