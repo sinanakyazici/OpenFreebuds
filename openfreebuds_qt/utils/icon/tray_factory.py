@@ -79,20 +79,20 @@ def create_battery_percentage_icon(theme: str, percentage: int) -> Image.Image:
     img = Image.new("RGBA", BATTERY_ICON_SIZE, color=(0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
-    # Blue text color
-    text_color = (0, 120, 255, 255)  # Blue color (RGB: 0, 120, 255)
-
     # Get text - only the number without % sign
     text = f"{percentage}"
 
     # Try to use a built-in font with larger size
     try:
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 180)
+        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 200)
     except Exception:
         try:
-            font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 180)
+            font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 200)
         except Exception:
-            font = ImageFont.load_default()
+            try:
+                font = ImageFont.truetype("arial.ttf", 200)
+            except Exception:
+                font = ImageFont.load_default()
 
     # Get text bounding box
     bbox = draw.textbbox((0, 0), text, font=font)
@@ -103,8 +103,14 @@ def create_battery_percentage_icon(theme: str, percentage: int) -> Image.Image:
     x = (BATTERY_ICON_SIZE[0] - text_width) / 2
     y = (BATTERY_ICON_SIZE[1] - text_height) / 2
 
-    # Draw the text
-    draw.text((x, y), text, fill=text_color, font=font)
+    # Draw black outline (stroke) for better visibility
+    outline_width = 8
+    for adj_x in range(-outline_width, outline_width + 1):
+        for adj_y in range(-outline_width, outline_width + 1):
+            draw.text((x + adj_x, y + adj_y), text, fill=(0, 0, 0, 255), font=font)
+
+    # Draw white text on top
+    draw.text((x, y), text, fill=(255, 255, 255, 255), font=font)
 
     return img
 
