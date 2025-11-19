@@ -74,14 +74,12 @@ def create_tray_icon(theme: str, state: int, battery: int, anc_mode: Optional[st
 
 def create_battery_percentage_icon(theme: str, percentage: int) -> Image.Image:
     """Create a simple icon showing battery percentage as text"""
-    is_dark = theme == "dark"
-
     # Create a transparent background
     img = Image.new("RGBA", ICON_SIZE, color=(0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
-    # Text color based on theme
-    text_color = (0, 0, 0, 255) if is_dark else (255, 255, 255, 255)
+    # Blue text color
+    text_color = (0, 120, 255, 255)  # Blue color (RGB: 0, 120, 255)
 
     # Get text
     text = f"{percentage}%"
