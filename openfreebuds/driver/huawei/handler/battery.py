@@ -18,7 +18,7 @@ class OfbHuaweiBatteryHandler(OfbDriverHandlerHuawei):
     handler_id = "battery"
     commands = [CMD_BATTERY_READ, CMD_BATTERY_NOTIFY]
 
-    def __init__(self, w_tws: bool = True, periodic_update: bool = True, update_interval: float = 1.0):
+    def __init__(self, w_tws: bool = True, periodic_update: bool = False, update_interval: float = 1.0):
         self.w_tws = w_tws
         self.periodic_update = periodic_update
         self.update_interval = update_interval
