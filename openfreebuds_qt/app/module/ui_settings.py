@@ -1,5 +1,6 @@
 from PyQt6.QtCore import QLocale
-from PyQt6.QtWidgets import QSystemTrayIcon
+from PyQt6.QtGui import QColor
+from PyQt6.QtWidgets import QSystemTrayIcon, QColorDialog
 from qasync import asyncSlot
 
 from openfreebuds import OfbEventKind
@@ -74,6 +75,14 @@ class OfbQtUiSettingsModule(Ui_OfbQtUiSettingsModule, OfbQtCommonModule):
 
         with blocked_signals(self.tray_show_case_battery):
             self.tray_show_case_battery.setChecked(self.config.get("ui", "tray_show_case_battery", False))
+
+        # Set up color buttons
+        self._update_color_button(self.tray_left_battery_color_button,
+                                  self.config.get("ui", "tray_left_battery_color", "#00FF00"))
+        self._update_color_button(self.tray_right_battery_color_button,
+                                  self.config.get("ui", "tray_right_battery_color", "#00FF00"))
+        self._update_color_button(self.tray_case_battery_color_button,
+                                  self.config.get("ui", "tray_case_battery_color", "#00FF00"))
 
     async def update_ui(self, event: OfbCoreEvent):
         if not event.kind_match(OfbEventKind.QT_SETTINGS_CHANGED):
@@ -152,3 +161,43 @@ class OfbQtUiSettingsModule(Ui_OfbQtUiSettingsModule, OfbQtCommonModule):
         self.config.set("ui", "tray_show_case_battery", value)
         self.config.save()
         await self.ofb.send_message(OfbEventKind.QT_SETTINGS_CHANGED)
+
+    def _update_color_button(self, button, color_hex: str):
+        """Update button background color"""
+        button.setStyleSheet(f"background-color: {color_hex};")
+
+    @asyncSlot()
+    async def on_tray_left_battery_color_button_clicked(self):
+        """Open color picker for left battery"""
+        current_color = QColor(self.config.get("ui", "tray_left_battery_color", "#00FF00"))
+        color = QColorDialog.getColor(current_color, self, "Select Left Battery Color")
+        if color.isValid():
+            color_hex = color.name()
+            self.config.set("ui", "tray_left_battery_color", color_hex)
+            self.config.save()
+            self._update_color_button(self.tray_left_battery_color_button, color_hex)
+            await self.ofb.send_message(OfbEventKind.QT_SETTINGS_CHANGED)
+
+    @asyncSlot()
+    async def on_tray_right_battery_color_button_clicked(self):
+        """Open color picker for right battery"""
+        current_color = QColor(self.config.get("ui", "tray_right_battery_color", "#00FF00"))
+        color = QColorDialog.getColor(current_color, self, "Select Right Battery Color")
+        if color.isValid():
+            color_hex = color.name()
+            self.config.set("ui", "tray_right_battery_color", color_hex)
+            self.config.save()
+            self._update_color_button(self.tray_right_battery_color_button, color_hex)
+            await self.ofb.send_message(OfbEventKind.QT_SETTINGS_CHANGED)
+
+    @asyncSlot()
+    async def on_tray_case_battery_color_button_clicked(self):
+        """Open color picker for case battery"""
+        current_color = QColor(self.config.get("ui", "tray_case_battery_color", "#00FF00"))
+        color = QColorDialog.getColor(current_color, self, "Select Case Battery Color")
+        if color.isValid():
+            color_hex = color.name()
+            self.config.set("ui", "tray_case_battery_color", color_hex)
+            self.config.save()
+            self._update_color_button(self.tray_case_battery_color_button, color_hex)
+            await self.ofb.send_message(OfbEventKind.QT_SETTINGS_CHANGED)

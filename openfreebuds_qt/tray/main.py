@@ -159,11 +159,21 @@ class OfbTrayIcon(IOfbTrayIcon):
         """Update battery percentage tray icons based on config settings"""
         theme = self.config.get_tray_icon_theme()
 
+        # Helper function to convert hex color to RGBA tuple
+        def hex_to_rgba(hex_color: str) -> tuple:
+            hex_color = hex_color.lstrip('#')
+            r = int(hex_color[0:2], 16)
+            g = int(hex_color[2:4], 16)
+            b = int(hex_color[4:6], 16)
+            return (r, g, b, 255)
+
         # Left earbud
         if self.config.get("ui", "tray_show_left_battery", False) and "left" in battery:
             if self.battery_left_icon is None:
                 self.battery_left_icon = QSystemTrayIcon(None)
-            icon = create_battery_percentage_icon(theme, battery["left"])
+            color_hex = self.config.get("ui", "tray_left_battery_color", "#00FF00")
+            color = hex_to_rgba(color_hex)
+            icon = create_battery_percentage_icon(theme, battery["left"], color)
             self.battery_left_icon.setIcon(QIcon(ImageQt.toqpixmap(icon)))
             self.battery_left_icon.setToolTip(f"Left: {battery['left']}%")
             self.battery_left_icon.show()
@@ -174,7 +184,9 @@ class OfbTrayIcon(IOfbTrayIcon):
         if self.config.get("ui", "tray_show_right_battery", False) and "right" in battery:
             if self.battery_right_icon is None:
                 self.battery_right_icon = QSystemTrayIcon(None)
-            icon = create_battery_percentage_icon(theme, battery["right"])
+            color_hex = self.config.get("ui", "tray_right_battery_color", "#00FF00")
+            color = hex_to_rgba(color_hex)
+            icon = create_battery_percentage_icon(theme, battery["right"], color)
             self.battery_right_icon.setIcon(QIcon(ImageQt.toqpixmap(icon)))
             self.battery_right_icon.setToolTip(f"Right: {battery['right']}%")
             self.battery_right_icon.show()
@@ -185,7 +197,9 @@ class OfbTrayIcon(IOfbTrayIcon):
         if self.config.get("ui", "tray_show_case_battery", False) and "case" in battery:
             if self.battery_case_icon is None:
                 self.battery_case_icon = QSystemTrayIcon(None)
-            icon = create_battery_percentage_icon(theme, battery["case"])
+            color_hex = self.config.get("ui", "tray_case_battery_color", "#00FF00")
+            color = hex_to_rgba(color_hex)
+            icon = create_battery_percentage_icon(theme, battery["case"], color)
             self.battery_case_icon.setIcon(QIcon(ImageQt.toqpixmap(icon)))
             self.battery_case_icon.setToolTip(f"Case: {battery['case']}%")
             self.battery_case_icon.show()
