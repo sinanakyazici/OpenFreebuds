@@ -3,7 +3,7 @@ on: push
 
 jobs:
   build_exe:
-    name: Windows portable build
+    name: Windows installer build
     runs-on: windows-latest
     steps:
       - uses: pdm-project/setup-pdm@v4
@@ -11,14 +11,16 @@ jobs:
             python-version: 3.12.8
       - name: Install Just
         run: choco install -y just
+      - name: Install Just
+        run: choco install -y nsis
       - uses: actions/checkout@v4
       - run: just prepare
       - run: just --evaluate
-      - run: just bump_version_git build win32_portable
-      - name: Upload portable
+      - run: just bump_version_git build win32_installer
+      - name: Upload installer
         uses: actions/upload-artifact@v4
         with:
-          name: openfreebuds_win32
+          name: openfreebuds_win32_installer
           path: .\dist\*
           if-no-files-found: error
 
