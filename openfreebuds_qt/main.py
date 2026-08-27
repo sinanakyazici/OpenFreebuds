@@ -80,9 +80,6 @@ class OfbQtApplication(IOfbQtApplication):
 
     @staticmethod
     def start(args):
-        if (STORAGE_PATH / "force_xorg").is_file():
-            print("Enforce xcb Qt backend due to setting")
-            os.environ["QT_QPA_PLATFORM"] = "xcb"
         return OfbQtApplication(args).exec_async()
 
     async def boot(self):
@@ -123,9 +120,9 @@ class OfbQtApplication(IOfbQtApplication):
             await self.updater_service.boot()
 
             # Qt version check & warn
-            with suppress(Exception):
-                if float(".".join(QT_VERSION_STR.split(".")[:2])) < 6.7:
-                    self.show_old_qt_warning()
+            # with suppress(Exception):
+            #     if float(".".join(QT_VERSION_STR.split(".")[:2])) < 6.7:
+            #         self.show_old_qt_warning()
 
             # Show UI
             self.tray.show()
@@ -206,8 +203,11 @@ class OfbQtApplication(IOfbQtApplication):
 
     def exec_async(self):
         self.event_loop.create_task(self.boot())
-        self.event_loop.run_until_complete(self.close_event.wait())
-        self.event_loop.close()
+        try:
+            self.event_loop.run_until_complete(self.close_event.wait())
+            self.event_loop.close()
+        except RuntimeError:
+            pass
 
     def show_no_tray_warning(self):
         if self.config.get("warn", "no_tray", False):
